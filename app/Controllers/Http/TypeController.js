@@ -1,5 +1,8 @@
 'use strict'
 
+const Type = use('App/Models/Type')
+const Database = use('Database')
+
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -18,6 +21,8 @@ class TypeController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    let types = await Type.all()
+    return response.json(types)
   }
 
   /**
@@ -41,6 +46,15 @@ class TypeController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const input = request.only([
+      'name'
+    ])
+    const type = new Type()
+
+    type.name = input.name
+
+    await type.save()
+    return response.status(201).json(type)
   }
 
   /**
@@ -53,6 +67,8 @@ class TypeController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const type = await Type.find(params.id)
+    return response.json(type)
   }
 
   /**
@@ -76,6 +92,19 @@ class TypeController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const input = request.only([
+      'name'
+    ])
+    const type = await Type.find(params.id)
+
+    if (!type) {
+      return response.status(404).json({data: 'Resource not found'})
+    }
+
+   type.name = input.name
+
+    await type.save()
+    return response.status(200).json(type)
   }
 
   /**
@@ -87,6 +116,14 @@ class TypeController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const type = await Type.find(params.id)
+
+    if (!type) {
+      return response.status(404).json({data: 'Resource not found'})
+    }
+
+    await type.delete()
+    return response.status(204).json(null)
   }
 }
 

@@ -1,5 +1,8 @@
 'use strict'
 
+const Pokemon = use('App/Models/Pokemon')
+const Database = use('Database')
+
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -18,6 +21,8 @@ class PokemonController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    let pokemons = await Pokemon.query().with('type').with('category').fetch()
+    return response.json(pokemons)
   }
 
   /**
@@ -41,6 +46,25 @@ class PokemonController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const input = request.only([
+      'name',
+      'image_url',
+      'type_ids',
+      'category_id',
+      'latitude',
+      'longitude'
+    ])
+    const pokemon = new Pokemon()
+
+    pokemon.name = input.name
+    pokemon.image_url = input.image_url
+    pokemon.type_ids = input.type_ids
+    pokemon.category_id = input.category_id
+    pokemon.latitude = input.latitude
+    pokemon.longitude = input.longitude
+
+    await pokemon.save()
+    return response.status(201).json(pokemon)
   }
 
   /**
@@ -53,6 +77,9 @@ class PokemonController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const pokemon = await Pokemon.find(params.id)
+    await pokemon.loadMany(['type', 'category'])
+    return response.json(pokemon)
   }
 
   /**
@@ -76,6 +103,29 @@ class PokemonController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const input = request.only([
+      'name',
+      'image_url',
+      'type_ids',
+      'category_id',
+      'latitude',
+      'longitude'
+    ])
+    const pokemon = await Pokemon.find(params.id)
+
+    if (!pokemon) {
+      return response.status(404).json({data: 'Resource not found'})
+    }
+
+    pokemon.name = input.name
+    pokemon.image_url = input.image_url
+    pokemon.type_ids = input.type_ids
+    pokemon.category_id = input.category_id
+    pokemon.latitude = input.latitude
+    pokemon.longitude = input.longitude
+
+    await pokemon.save()
+    return response.status(200).json(pokemon)
   }
 
   /**
@@ -87,6 +137,14 @@ class PokemonController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const pokemon = await Pokemon.find(params.id)
+
+    if (!pokemon) {
+      return response.status(404).json({data: 'Resource not found'})
+    }
+
+    await pokemon.delete()
+    return response.status(204).json(null)
   }
 }
 
