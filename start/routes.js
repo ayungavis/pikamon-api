@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -14,39 +14,47 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route')
+const Route = use('Route');
 const Prefix = 'api/v1';
 
-Route.on('/').render('welcome')
+Route.on('/').render('welcome');
 
 Route.group(() => {
-	Route.get('/', 'TypeController.index').middleware('auth')
-	Route.get(':id', 'TypeController.show').middleware('auth')
-	Route.post('/', 'TypeController.store').middleware('auth')
-	Route.patch(':id', 'TypeController.update').middleware('auth')
-	Route.delete(':id', 'TypeController.destroy').middleware('auth')
-}).prefix(Prefix + '/types');
+  Route.get('/', 'TypeController.index');
+  Route.get(':id', 'TypeController.show');
+  Route.post('/', 'TypeController.store').middleware('auth');
+  Route.patch(':id', 'TypeController.update').middleware('auth');
+  Route.delete(':id', 'TypeController.destroy').middleware('auth');
+}).prefix(`${Prefix}/types`);
 
 Route.group(() => {
-	Route.get('/', 'CategoryController.index').middleware('auth')
-	Route.get(':id', 'CategoryController.show').middleware('auth')
-	Route.post('/', 'CategoryController.store').middleware('auth')
-	Route.patch(':id', 'CategoryController.update').middleware('auth')
-	Route.delete(':id', 'CategoryController.destroy').middleware('auth')
-}).prefix(Prefix + '/categories');
+  Route.get('/', 'MoveController.index');
+  Route.get(':id', 'MoveController.show');
+  Route.post('/', 'MoveController.store').middleware('auth');
+  Route.patch(':id', 'MoveController.update').middleware('auth');
+  Route.delete(':id', 'MoveController.destroy').middleware('auth');
+}).prefix(`${Prefix}/moves`);
 
 Route.group(() => {
-	Route.get('/', 'PokemonController.index').middleware('auth')
-	Route.get(':id', 'PokemonController.show').middleware('auth')
-	Route.post('/', 'PokemonController.store').middleware('auth')
-	Route.patch(':id', 'PokemonController.update').middleware('auth')
-	Route.delete(':id', 'PokemonController.destroy').middleware('auth')
-}).prefix(Prefix + '/pokemons');
+  Route.get('/', 'AbilityController.index');
+  Route.get(':id', 'AbilityController.show');
+  Route.post('/', 'AbilityController.store').middleware('auth');
+  Route.patch(':id', 'AbilityController.update').middleware('auth');
+  Route.delete(':id', 'AbilityController.destroy').middleware('auth');
+}).prefix(`${Prefix}/abilities`);
 
 Route.group(() => {
-	Route.post('register', 'AuthController.register');
-	Route.post('login', 'AuthController.login');
-	Route.get('check', 'AuthController.check').middleware('auth')
-	Route.post('refresh', 'AuthController.refreshToken').middleware('auth')
-	Route.post('logout', 'AuthController.logout').middleware('auth')
-}).prefix(Prefix + '/auth');
+  Route.get('/', 'PokemonController.index');
+  Route.get(':id', 'PokemonController.show');
+  Route.post('/', 'PokemonController.store').middleware('auth');
+  Route.patch(':id', 'PokemonController.update').middleware('auth');
+  Route.delete(':id', 'PokemonController.destroy').middleware('auth');
+}).prefix(`${Prefix}/pokemons`);
+
+Route.group(() => {
+  Route.post('register', 'AuthController.register');
+  Route.post('login', 'AuthController.login');
+  Route.get('check', 'AuthController.check').middleware('auth');
+  Route.post('refresh', 'AuthController.refreshToken').middleware('auth');
+  Route.post('logout', 'AuthController.logout').middleware('auth');
+}).prefix(`${Prefix}/auth`);

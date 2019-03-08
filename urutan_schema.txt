@@ -1,0 +1,81 @@
+berry_firmness
+berry_flavor
+item_attribute
+item_fling_effect
+item_pocket
+pokemon_characteristic
+pokemon_color
+pokemon_egg_group
+pokemon_form
+pokemon_gender
+pokemon_growth_rate
+pokemon_shape
+pokemon_habitat
+evolution_trigger
+move_ailment
+move_battle_style
+move_category
+move_damage_class
+move_learn_method
+move_target
+pokemon_type
+pokemon_nature
+pokemon_stats
+pokemon_ability
+pokemon_species
+-- pokemon_color        (v)
+-- pokemon_habitat      (v)
+-- pokemon_shape        (v)
+item_category
+-- item_pocket          (v)
+item
+-- pokemon_species      (v)
+-- item_category        (v)
+-- item_fling_effect    (v)
+item_has_attribute
+-- item_attribute       (v)
+-- item                 (v)
+evolution_chain
+-- item                 (v)
+move
+-- move_ailment         (v)
+-- move_category        (v)
+-- move_damage_class    (v)
+-- move_target          (v)
+-- pokemon_type         (v)
+machine
+-- item                 (v)
+-- move                 (v)
+pokemon_base
+-- pokemon_ability      (v)
+-- pokemon_type         (v)
+pokemon_base_ev
+-- pokemon_base         (v)
+pokemon_growth_rate_experience
+-- pokemon_growth_rate  (v)
+pokemon_has_item
+-- item                 (v)
+-- pokemon_base         (v)
+pokemon_has_move
+-- move                 (v)
+-- move_learn_method    (v)
+-- pokemon_base         (v)
+pokemon_has_egg_group
+-- pokemon_egg_group    (v)
+-- pokemon_species      (v)
+pokemon_has_form
+-- pokemon_species      (v)
+evolution_chain_data
+-- evolution_chain      (v)
+-- item                 (v)
+-- pokemon_species      (v)
+-- move                 (v)
+-- pokemon_type         (v)
+-- evolution_trigger    (v)
+berry
+-- berry_firmness       (v)
+-- item                 (v)
+-- pokemon_type         (v)
+berry_has_flavor
+-- berry                (v)
+-- berry_flavor         (v)

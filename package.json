@@ -29,7 +29,12 @@
     "adonis-datagrid": "^1.0.0",
     "mysql": "^2.16.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-rallycoding": "^3.2.0",
+    "eslint-plugin-import": "^2.16.0"
+  },
   "autoload": {
     "App": "./app"
   }
