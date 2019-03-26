@@ -13,7 +13,7 @@ class PokemonBase extends Model {
   }
 
   pokemonAbility() {
-    return this.belongsTo('App/Models/PokemonAbility');
+    return this.hasMany('App/Models/PokemonAbility');
   }
 
   pokemonType() {

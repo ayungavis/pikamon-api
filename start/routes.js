@@ -44,11 +44,11 @@ Route.group(() => {
 }).prefix(`${Prefix}/abilities`);
 
 Route.group(() => {
-  Route.get('/', 'PokemonController.index');
-  Route.get(':id', 'PokemonController.show');
-  Route.post('/', 'PokemonController.store').middleware('auth');
-  Route.patch(':id', 'PokemonController.update').middleware('auth');
-  Route.delete(':id', 'PokemonController.destroy').middleware('auth');
+  Route.get('/', 'PokemonBaseController.index');
+  Route.get(':name', 'PokemonBaseController.show');
+  Route.post('/', 'PokemonBaseController.store').middleware('auth');
+  Route.patch(':id', 'PokemonBaseController.update').middleware('auth');
+  Route.delete(':id', 'PokemonBaseController.destroy').middleware('auth');
 }).prefix(`${Prefix}/pokemons`);
 
 Route.group(() => {
